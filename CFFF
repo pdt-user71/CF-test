@@ -234,7 +234,7 @@ Resources:
       SecurityGroupIds:
         - !GetAtt "InstanceSecurityGroup.GroupId"
       UserData:
-          Fn::Base64: |
+        Fn::Base64: |
           #!/bin/bash
           yum update -y
           amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
@@ -262,7 +262,7 @@ Resources:
          Ebs:
           VolumeType: gp2
           VolumeSize: 8
-Tags:
+      Tags:
       - Key: Name
         Value: CF-public-1c
       KeyName: !Ref KeyName
@@ -291,7 +291,7 @@ chown -R ec2-user:apache /var/www
     Properties:
       Name: cf-elb
       Scheme: internet-facing
-Type: application
+      Type: application
       SecurityGroups: 
         - !Ref InstanceSecurityGroup
       Subnets: 
@@ -306,7 +306,7 @@ Type: application
       Name: ELBtargetGP
       Port: 80
       Protocol: HTTP
-Targets: 
+      Targets: 
         - Id: !Ref TrabreInstance2
           Port: 80
         - Id: !Ref TrabreInstance1
